@@ -140,4 +140,51 @@ export class UserService {
       msg: '注册成功！',
     };
   }
+
+  /**
+   * 账号密码登录服务
+   */
+  async passwordLogin({ phone, password }) {
+    // 查找用户是否注册过
+    const foundUser = await this.userRepository.findOneBy({ phone });
+    if (!foundUser) {
+      throw new BadRequestException('账号不存在！');
+    }
+    // 检查密码是否正确
+    const isPasswordValid =
+      this.secretTool.getSecret(password) === foundUser.password;
+    if (!isPasswordValid) {
+      throw new BadRequestException('密码错误！');
+    }
+
+    return {
+      data: this.jwtService.sign({ id: foundUser.id }),
+      msg: '登录成功！',
+    };
+  }
+
+  /**
+   * 验证码登录服务
+   */
+  async phoneLogin({ phone, sendCode }) {
+    // 查找用户是否注册过
+    const foundUser = await this.userRepository.findOneBy({ phone });
+    if (!foundUser) {
+      throw new BadRequestException('账号或密码错误！');
+    }
+    // 检查是否获取手机验证码
+    const codeExist = await this.redis.exists(`login:code:${phone}`);
+    if (!codeExist) throw new BadRequestException('请先获取手机验证码');
+
+    // 检查手机验证码是否正确
+    const codeRes = (await this.redis.get(`login:code:${phone}`))!.split(
+      '_',
+    )[1];
+    if (codeRes !== sendCode) throw new BadRequestException('手机验证码不正确');
+
+    return {
+      data: this.jwtService.sign({ id: foundUser.id }),
+      msg: '登录成功！',
+    };
+  }
 }

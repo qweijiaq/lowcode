@@ -9,7 +9,8 @@ import { CaptchaDto } from './dto/captcha.dto';
 import { SecretTool } from '../utils/Secret';
 import { SendCodeDto } from './dto/sendCode.dto';
 import { RandomTool } from '../utils/Random';
-import { RegisterDto } from './dto/register';
+import { RegisterDto } from './dto/register.dto';
+import { PasswordLoginDto, PhoneLoginDto } from './dto/login.dto';
 
 @Controller('user')
 export class UserController {
@@ -63,5 +64,21 @@ export class UserController {
   register(@Body() body: RegisterDto) {
     const { phone, sendCode, password, confirm } = body;
     return this.userService.register(phone, sendCode, password, confirm);
+  }
+
+  /**
+   * 账号密码登录控制器
+   */
+  @Post('password_login')
+  passwordLogin(@Body() body: PasswordLoginDto) {
+    return this.userService.passwordLogin(body);
+  }
+
+  /**
+   * 短信验证码登录控制器
+   */
+  @Post('phone_login')
+  phoneLogin(@Body() body: PhoneLoginDto) {
+    return this.userService.phoneLogin(body);
   }
 }
