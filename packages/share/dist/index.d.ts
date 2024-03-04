@@ -1,3 +1,25 @@
-declare const xd = "\u5C0F\u6EF4\u8BFE\u5802";
+interface IUser {
+    id: number;
+    phone: string;
+    openId: string;
+    avatar: string;
+    username: string;
+    password: string;
+}
 
-export { xd };
+interface CaptchaRequest {
+    type: "register" | "login";
+}
+type RegisterRequest = Pick<IUser, "phone" | "password"> & {
+    sendCode: string;
+    confirm: string;
+};
+type SendCodeRequest = Pick<IUser, "phone"> & {
+    captcha: string;
+} & CaptchaRequest;
+type LoginWithPasswordRequest = Pick<IUser, "phone" | "password">;
+type LoginWithPhoneRequest = Pick<IUser, "phone"> & {
+    sendCode: string;
+};
+
+export type { CaptchaRequest, IUser, LoginWithPasswordRequest, LoginWithPhoneRequest, RegisterRequest, SendCodeRequest };
