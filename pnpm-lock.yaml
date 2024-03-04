@@ -39,6 +39,9 @@ importers:
 
   packages/client:
     dependencies:
+      '@ant-design/icons':
+        specifier: ^5.2.6
+        version: 5.2.6(react-dom@18.2.0)(react@18.2.0)
       '@lowcode/share':
         specifier: workspace:^
         version: link:../share
