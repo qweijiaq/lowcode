@@ -2,3 +2,6 @@
 
 /.vscode
 node_modules
+/packages/server/msgConfig.ts
+
+/packages/*/dist
