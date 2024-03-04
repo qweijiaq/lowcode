@@ -9,6 +9,13 @@ import {
   TextComponent,
   SplitComponent,
   EmptyComponent,
+  RichTextComponent,
+  QrcodeComponent,
+  AlertComponent,
+  InputComponent,
+  TextAreaComponent,
+  RadioComponent,
+  CheckboxComponent,
 } from "..";
 
 // @ts-ignore
@@ -21,4 +28,11 @@ export const componentList: Record<TComponentTypes, FC<any>> = {
   titleText: TextComponent,
   split: SplitComponent,
   empty: EmptyComponent,
+  richText: RichTextComponent,
+  qrcode: QrcodeComponent,
+  alert: AlertComponent,
+  input: InputComponent,
+  textArea: TextAreaComponent,
+  radio: RadioComponent,
+  checkbox: CheckboxComponent,
 };

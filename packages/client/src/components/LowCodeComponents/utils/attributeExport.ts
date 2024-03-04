@@ -8,6 +8,12 @@ import {
   TextComponentProps,
   SplitComponentProps,
   EmptyComponentProps,
+  RichTextComponentProps,
+  QrcodeComponentProps,
+  AlertComponentProps,
+  InputComponentProps,
+  CheckboxComponentProps,
+  RadioComponentProps,
 } from "..";
 import type { TBasicComponentConfig, TComponentTypes } from "@lowcode/share";
 
@@ -21,6 +27,13 @@ export const componentPropsList: Record<TComponentTypes, FC<any>> = {
   titleText: TextComponentProps,
   split: SplitComponentProps,
   empty: EmptyComponentProps,
+  richText: RichTextComponentProps,
+  qrcode: QrcodeComponentProps,
+  alert: AlertComponentProps,
+  input: InputComponentProps,
+  textArea: InputComponentProps,
+  radio: RadioComponentProps,
+  checkbox: CheckboxComponentProps,
 };
 
 export function getComponentPropsByType(type: TBasicComponentConfig["type"]) {

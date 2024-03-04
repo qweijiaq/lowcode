@@ -406,6 +406,248 @@ function EmptyComponent(_props) {
   );
 }
 
+const richTextComponentDefaultConfig = {
+  content: {
+    value: "",
+    defaultValue: "",
+    isHidden: false
+  }
+};
+
+function RichTextComponent(_props) {
+  const props = React.useMemo(() => {
+    return {
+      ...getDefaultValueByConfig(richTextComponentDefaultConfig),
+      ..._props
+    };
+  }, [_props]);
+  if (!props.content)
+    return /* @__PURE__ */ React__default.createElement("div", { id: "placeholder", className: "w-full h-20" }, "\u8BF7\u5728\u5BCC\u6587\u672C\u8F93\u5165\u5185\u5BB9");
+  return /* @__PURE__ */ React__default.createElement("div", { dangerouslySetInnerHTML: { __html: props.content } });
+}
+
+const qrcodeComponentDefaultConfig = {
+  value: {
+    value: "-",
+    defaultValue: "-",
+    isHidden: false
+  },
+  bgColor: {
+    value: "white",
+    defaultValue: "white",
+    isHidden: false
+  },
+  color: {
+    value: "black",
+    defaultValue: "black",
+    isHidden: false
+  },
+  errorLevel: {
+    value: "L",
+    defaultValue: "L",
+    isHidden: false
+  },
+  icon: {
+    value: "",
+    defaultValue: "",
+    isHidden: true
+  },
+  iconSize: {
+    value: 12,
+    defaultValue: 12,
+    isHidden: true
+  },
+  size: {
+    value: 160,
+    defaultValue: 160,
+    isHidden: false
+  }
+};
+
+function QrcodeComponent(_props) {
+  const props = React.useMemo(() => {
+    return { ...getDefaultValueByConfig(qrcodeComponentDefaultConfig), ..._props };
+  }, [_props]);
+  return /* @__PURE__ */ React__default.createElement("div", { className: "flex items-center justify-center p-1" }, /* @__PURE__ */ React__default.createElement(antd.QRCode, { ...props }));
+}
+
+const alertComponentDefaultConfig = {
+  title: {
+    defaultValue: "",
+    value: "",
+    isHidden: false
+  },
+  showIcon: {
+    defaultValue: true,
+    value: true,
+    isHidden: false
+  },
+  showClose: {
+    defaultValue: true,
+    value: true,
+    isHidden: false
+  },
+  type: {
+    defaultValue: "warning",
+    value: "warning",
+    isHidden: false
+  }
+};
+
+function AlertComponent(_props) {
+  const props = React.useMemo(() => {
+    return {
+      ...getDefaultValueByConfig(alertComponentDefaultConfig),
+      ..._props
+    };
+  }, [_props]);
+  return /* @__PURE__ */ React__default.createElement(
+    antd.Alert,
+    {
+      type: props.type,
+      message: props.title || "\u8BF7\u8F93\u5165\u6587\u672C",
+      showIcon: props.showIcon,
+      closable: props.showClose
+    }
+  );
+}
+
+const inputComponentDefaultConfig = {
+  placeholder: {
+    value: "\u8BF7\u8F93\u5165\u5185\u5BB9\u2026\u2026",
+    defaultValue: "\u8BF7\u8F93\u5165\u5185\u5BB9\u2026\u2026",
+    isHidden: false
+  },
+  text: {
+    value: "",
+    defaultValue: "",
+    isHidden: false
+  },
+  title: {
+    value: "\u8BF7\u8F93\u5165\u6807\u9898\u2026\u2026",
+    defaultValue: "\u8BF7\u8F93\u5165\u6807\u9898\u2026\u2026",
+    isHidden: false
+  },
+  onUpdate: {
+    value: void 0,
+    defaultValue: void 0,
+    isHidden: true
+  }
+};
+
+function InputComponent(_props) {
+  const props = React.useMemo(() => {
+    return { ...getDefaultValueByConfig(inputComponentDefaultConfig), ..._props };
+  }, [_props]);
+  return /* @__PURE__ */ React__default.createElement("div", { className: "space-y-2 p-4" }, /* @__PURE__ */ React__default.createElement("span", { className: "text-lg font-ld" }, props.title, ":"), /* @__PURE__ */ React__default.createElement("br", null), /* @__PURE__ */ React__default.createElement(antd.Input, { placeholder: props.placeholder, value: props.text, onChange: (event) => props.onUpdate?.(event.target.value) }));
+}
+
+const { TextArea } = antd.Input;
+function TextAreaComponent(_props) {
+  const props = React.useMemo(() => {
+    return { ...getDefaultValueByConfig(inputComponentDefaultConfig), ..._props };
+  }, [_props]);
+  return /* @__PURE__ */ React__default.createElement("div", { className: "space-y-2 p-4" }, /* @__PURE__ */ React__default.createElement("span", { className: "text-lg font-bold" }, props.title, ":"), " ", /* @__PURE__ */ React__default.createElement("br", null), /* @__PURE__ */ React__default.createElement(TextArea, { placeholder: props.placeholder, value: props.text, onChange: (event) => props.onUpdate?.(event.target.value) }));
+}
+
+const defaultRadioOptions = {
+  id: "",
+  value: "\u9009\u98791"
+};
+const radioComponentDefaultConfig = {
+  id: {
+    value: "",
+    defaultValue: "",
+    isHidden: true
+  },
+  title: {
+    value: "\u9ED8\u8BA4\u5C55\u793A\u7684\u6807\u9898",
+    defaultValue: "\u9ED8\u8BA4\u5C55\u793A\u7684\u6807\u9898",
+    isHidden: false
+  },
+  options: {
+    value: [defaultRadioOptions],
+    defaultValue: [defaultRadioOptions],
+    isHidden: false
+  },
+  defaultRadio: {
+    value: defaultRadioOptions.id,
+    defaultValue: defaultRadioOptions.id,
+    isHidden: false
+  },
+  onUpdate: {
+    value: void 0,
+    defaultValue: void 0,
+    isHidden: false
+  }
+};
+
+function RadioComponent(_props) {
+  const props = React.useMemo(() => {
+    return {
+      ...getDefaultValueByConfig(radioComponentDefaultConfig),
+      ..._props
+    };
+  }, [_props]);
+  return /* @__PURE__ */ React__default.createElement("div", { className: "space-y-2 p-4" }, /* @__PURE__ */ React__default.createElement("span", { className: "text-lg font-bold" }, props.title, ":"), /* @__PURE__ */ React__default.createElement("br", null), /* @__PURE__ */ React__default.createElement(
+    antd.Radio.Group,
+    {
+      value: props.defaultRadio,
+      onChange: (event) => props.onUpdate?.(event.target.value)
+    },
+    props.options.map((item) => /* @__PURE__ */ React__default.createElement(antd.Radio, { value: item.id, key: item.id }, item.value))
+  ));
+}
+
+const defaultCheckboxOptions = {
+  id: "",
+  value: "\u9009\u98791"
+};
+const checkboxComponentDefaultConfig = {
+  defaultChecked: {
+    value: [defaultCheckboxOptions.id],
+    defaultValue: [defaultCheckboxOptions.id],
+    isHidden: false
+  },
+  id: {
+    value: "",
+    defaultValue: "",
+    isHidden: false
+  },
+  options: {
+    value: [defaultCheckboxOptions],
+    defaultValue: [defaultCheckboxOptions],
+    isHidden: false
+  },
+  title: {
+    value: "\u9ED8\u8BA4\u5C55\u793A\u7684\u6807\u9898",
+    defaultValue: "\u9ED8\u8BA4\u5C55\u793A\u7684\u6807\u9898",
+    isHidden: false
+  },
+  onUpdate: {
+    value: void 0,
+    defaultValue: void 0,
+    isHidden: false
+  }
+};
+
+function CheckboxComponent(_props) {
+  const props = React.useMemo(() => {
+    return { ...getDefaultValueByConfig(checkboxComponentDefaultConfig), ..._props };
+  }, [_props]);
+  return /* @__PURE__ */ React__default.createElement("div", { className: "space-y-2 p-4" }, /* @__PURE__ */ React__default.createElement("span", { className: "text-lg font-bold" }, props.title), /* @__PURE__ */ React__default.createElement("br", null), /* @__PURE__ */ React__default.createElement(
+    antd.Checkbox.Group,
+    {
+      options: props.options.map((item) => ({
+        label: item.value,
+        value: item.id
+      })),
+      value: props.defaultChecked,
+      onChange: (value) => props.onUpdate?.(value)
+    }
+  ));
+}
+
 function objectOmit(obj, keys) {
   const result = {};
   for (const key in obj) {
@@ -429,7 +671,14 @@ const componentList = {
   list: ListComponent,
   titleText: TextComponent,
   split: SplitComponent,
-  empty: EmptyComponent
+  empty: EmptyComponent,
+  richText: RichTextComponent,
+  qrcode: QrcodeComponent,
+  alert: AlertComponent,
+  input: InputComponent,
+  textArea: TextAreaComponent,
+  radio: RadioComponent,
+  checkbox: CheckboxComponent
 };
 
 function calcValueByString(str) {
@@ -448,28 +697,43 @@ function calcTypeByString(str) {
   return "string";
 }
 
+exports.AlertComponent = AlertComponent;
 exports.CardComponent = CardComponent;
+exports.CheckboxComponent = CheckboxComponent;
 exports.EmptyComponent = EmptyComponent;
 exports.ImageComponent = ImageComponent;
+exports.InputComponent = InputComponent;
 exports.ListComponent = ListComponent;
+exports.QrcodeComponent = QrcodeComponent;
+exports.RadioComponent = RadioComponent;
+exports.RichTextComponent = RichTextComponent;
 exports.SplitComponent = SplitComponent;
 exports.SwiperComponent = SwiperComponent;
+exports.TextAreaComponent = TextAreaComponent;
 exports.TextComponent = TextComponent;
 exports.VideoComponent = VideoComponent;
+exports.alertComponentDefaultConfig = alertComponentDefaultConfig;
 exports.calcTypeByString = calcTypeByString;
 exports.calcValueByString = calcValueByString;
 exports.cardComponentDefaultConfig = cardComponentDefaultConfig;
+exports.checkboxComponentDefaultConfig = checkboxComponentDefaultConfig;
 exports.componentList = componentList;
+exports.defaultCheckboxOptions = defaultCheckboxOptions;
 exports.defaultImageInfo = defaultImageInfo;
+exports.defaultRadioOptions = defaultRadioOptions;
 exports.emptyComponentDefaultConfig = emptyComponentDefaultConfig;
 exports.fillComponentPropsByConfig = fillComponentPropsByConfig;
 exports.getComponentByType = getComponentByType;
 exports.getDefaultValueByConfig = getDefaultValueByConfig;
 exports.imageComponentDefaultConfig = imageComponentDefaultConfig;
+exports.inputComponentDefaultConfig = inputComponentDefaultConfig;
 exports.listComponentDefaultConfig = listComponentDefaultConfig;
 exports.listItem = listItem;
 exports.objectOmit = objectOmit;
 exports.objectPick = objectPick;
+exports.qrcodeComponentDefaultConfig = qrcodeComponentDefaultConfig;
+exports.radioComponentDefaultConfig = radioComponentDefaultConfig;
+exports.richTextComponentDefaultConfig = richTextComponentDefaultConfig;
 exports.splitComponentDefaultConfig = splitComponentDefaultConfig;
 exports.swiperComponentDefaultConfig = swiperComponentDefaultConfig;
 exports.textComponentDefaultConfig = textComponentDefaultConfig;

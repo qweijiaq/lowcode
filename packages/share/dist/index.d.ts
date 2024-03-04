@@ -178,6 +178,137 @@ declare const emptyComponentDefaultConfig: TEmptyComponentConfigResult;
 
 declare function EmptyComponent(_props: IEmptyComponentProps): React__default.JSX.Element;
 
+interface IRichTextComponentProps {
+    content: string;
+}
+type TRichTextComponentConfig = TBasicComponentConfig<"richText", IRichTextComponentProps>;
+type TRichTextComponentConfigResult = TransformedComponentConfig<IRichTextComponentProps>;
+declare const richTextComponentDefaultConfig: TRichTextComponentConfigResult;
+
+declare function RichTextComponent(_props: IRichTextComponentProps): React__default.JSX.Element;
+
+interface IQrcodeComponentProps {
+    icon: string;
+    size: number;
+    value: string;
+    color: string;
+    bgColor: string;
+    iconSize: number;
+    errorLevel: "L" | "M" | "Q" | "H";
+}
+type TQrcodeComponentConfig = TBasicComponentConfig<"qrcode", IQrcodeComponentProps>;
+type TQrcodeComponentConfigResult = TransformedComponentConfig<IQrcodeComponentProps>;
+declare const qrcodeComponentDefaultConfig: TQrcodeComponentConfigResult;
+
+declare function QrcodeComponent(_props: IQrcodeComponentProps): React__default.JSX.Element;
+
+interface IAlertComponentProps {
+    title: string;
+    showIcon: boolean;
+    showClose: boolean;
+    type: "success" | "info" | "warning" | "error";
+}
+type TAlertComponentConfig = {
+    type: "alert";
+    id: string;
+    props: {
+        title: string;
+        description: string;
+        showIcon: boolean;
+        showClose: boolean;
+        isBanner: boolean;
+        type: "success" | "info" | "warning" | "error";
+    };
+};
+type TAlertComponentConfigResult = TransformedComponentConfig<IAlertComponentProps>;
+declare const alertComponentDefaultConfig: {
+    title: {
+        defaultValue: string;
+        value: string;
+        isHidden: boolean;
+    };
+    showIcon: {
+        defaultValue: boolean;
+        value: boolean;
+        isHidden: boolean;
+    };
+    showClose: {
+        defaultValue: boolean;
+        value: boolean;
+        isHidden: boolean;
+    };
+    type: {
+        defaultValue: string;
+        value: string;
+        isHidden: boolean;
+    };
+};
+
+declare function AlertComponent(_props: IAlertComponentProps): React__default.JSX.Element;
+
+interface IInputComponentProps {
+    title: string;
+    text: string;
+    placeholder: string;
+    onUpdate?: (value: string) => void;
+}
+type TInputComponentConfig = TBasicComponentConfig<"input", IInputComponentProps>;
+type TInputComponentConfigResult = TransformedComponentConfig<IInputComponentProps>;
+declare const inputComponentDefaultConfig: TInputComponentConfigResult;
+
+declare function InputComponent(_props: IInputComponentProps): React__default.JSX.Element;
+
+interface ITextAreaComponentProps {
+    title: string;
+    text: string;
+    placeholder: string;
+    onUpdate?: (value: string) => void;
+}
+type TTextAreaComponentConfig = TBasicComponentConfig<'textArea', ITextAreaComponentProps>;
+type TTextAreaComponentConfigResult = TransformedComponentConfig<ITextAreaComponentProps>;
+
+declare function TextAreaComponent(_props: ITextAreaComponentProps): React__default.JSX.Element;
+
+interface IRadioComponentProps {
+    id: string;
+    title: string;
+    defaultRadio: string;
+    options: {
+        id: string;
+        value: string;
+    }[];
+    onUpdate?: (value: string[]) => void;
+}
+type TRadioComponentConfig = TBasicComponentConfig<"radio", IRadioComponentProps>;
+type TRadioComponentConfigResult = TransformedComponentConfig<IRadioComponentProps>;
+declare const defaultRadioOptions: {
+    id: string;
+    value: string;
+};
+declare const radioComponentDefaultConfig: TRadioComponentConfigResult;
+
+declare function RadioComponent(_props: IRadioComponentProps): React__default.JSX.Element;
+
+interface ICheckboxComponentProps {
+    id: string;
+    title: string;
+    defaultChecked: string[];
+    options: {
+        id: string;
+        value: string;
+    }[];
+    onUpdate?: (value: any[]) => void;
+}
+type TCheckboxComponentConfig = TBasicComponentConfig<"checkbox", ICheckboxComponentProps>;
+type TCheckboxComponentConfigResult = TransformedComponentConfig<ICheckboxComponentProps>;
+declare const defaultCheckboxOptions: {
+    id: string;
+    value: string;
+};
+declare const checkboxComponentDefaultConfig: TCheckboxComponentConfigResult;
+
+declare function CheckboxComponent(_props: ICheckboxComponentProps): React__default.JSX.Element;
+
 /**
  * 从对象中删除指定的属性
  *
@@ -211,4 +342,4 @@ declare function calcValueByString(str: string): string | number | boolean;
  */
 declare function calcTypeByString(str: string): "number" | "boolean" | "string";
 
-export { type CaptchaRequest, CardComponent, EmptyComponent, type ICardComponentProps, type IComponent, type IComponentData, type IComponentPropWarpper, type IEmptyComponentProps, type IImageComponentProps, type IListComponentProps, type IListItem, type ILowCode, type ISplitComponentProps, type ISwiperComponentProps, type ITextComponentProps, type IUser, type IVideoComponentProps, ImageComponent, ListComponent, type LoginWithPasswordRequest, type LoginWithPhoneRequest, type PostReleaseRequest, type RegisterRequest, type SendCodeRequest, SplitComponent, SwiperComponent, type TBasicComponentConfig, type TCardComponentConfig, type TCardComponentConfigResult, type TComponentPropsUnion, type TComponentTypes, type TEmptyComponentConfig, type TEmptyComponentConfigResult, type TImageComponentConfig, type TImageComponentConfigResult, type TListComponentConfig, type TListComponentConfigResult, type TSplitComponentConfig, type TSplitComponentConfigResult, type TSwiperComponentConfig, type TSwiperComponentConfigResult, type TTextComponentConfig, type TTextComponentConfigResult, type TVideoComponentConfig, type TVideoComponentConfigResult, TextComponent, type TransformedComponentConfig, VideoComponent, calcTypeByString, calcValueByString, cardComponentDefaultConfig, componentList, defaultImageInfo, emptyComponentDefaultConfig, fillComponentPropsByConfig, getComponentByType, getDefaultValueByConfig, imageComponentDefaultConfig, listComponentDefaultConfig, listItem, objectOmit, objectPick, splitComponentDefaultConfig, swiperComponentDefaultConfig, textComponentDefaultConfig, videoComponentDefaultConfig };
+export { AlertComponent, type CaptchaRequest, CardComponent, CheckboxComponent, EmptyComponent, type IAlertComponentProps, type ICardComponentProps, type ICheckboxComponentProps, type IComponent, type IComponentData, type IComponentPropWarpper, type IEmptyComponentProps, type IImageComponentProps, type IInputComponentProps, type IListComponentProps, type IListItem, type ILowCode, type IQrcodeComponentProps, type IRadioComponentProps, type IRichTextComponentProps, type ISplitComponentProps, type ISwiperComponentProps, type ITextAreaComponentProps, type ITextComponentProps, type IUser, type IVideoComponentProps, ImageComponent, InputComponent, ListComponent, type LoginWithPasswordRequest, type LoginWithPhoneRequest, type PostReleaseRequest, QrcodeComponent, RadioComponent, type RegisterRequest, RichTextComponent, type SendCodeRequest, SplitComponent, SwiperComponent, type TAlertComponentConfig, type TAlertComponentConfigResult, type TBasicComponentConfig, type TCardComponentConfig, type TCardComponentConfigResult, type TCheckboxComponentConfig, type TCheckboxComponentConfigResult, type TComponentPropsUnion, type TComponentTypes, type TEmptyComponentConfig, type TEmptyComponentConfigResult, type TImageComponentConfig, type TImageComponentConfigResult, type TInputComponentConfig, type TInputComponentConfigResult, type TListComponentConfig, type TListComponentConfigResult, type TQrcodeComponentConfig, type TQrcodeComponentConfigResult, type TRadioComponentConfig, type TRadioComponentConfigResult, type TRichTextComponentConfig, type TRichTextComponentConfigResult, type TSplitComponentConfig, type TSplitComponentConfigResult, type TSwiperComponentConfig, type TSwiperComponentConfigResult, type TTextAreaComponentConfig, type TTextAreaComponentConfigResult, type TTextComponentConfig, type TTextComponentConfigResult, type TVideoComponentConfig, type TVideoComponentConfigResult, TextAreaComponent, TextComponent, type TransformedComponentConfig, VideoComponent, alertComponentDefaultConfig, calcTypeByString, calcValueByString, cardComponentDefaultConfig, checkboxComponentDefaultConfig, componentList, defaultCheckboxOptions, defaultImageInfo, defaultRadioOptions, emptyComponentDefaultConfig, fillComponentPropsByConfig, getComponentByType, getDefaultValueByConfig, imageComponentDefaultConfig, inputComponentDefaultConfig, listComponentDefaultConfig, listItem, objectOmit, objectPick, qrcodeComponentDefaultConfig, radioComponentDefaultConfig, richTextComponentDefaultConfig, splitComponentDefaultConfig, swiperComponentDefaultConfig, textComponentDefaultConfig, videoComponentDefaultConfig };
