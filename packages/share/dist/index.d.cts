@@ -1,5 +1,5 @@
-import * as react from 'react';
-import react__default, { FC } from 'react';
+import * as React from 'react';
+import React__default, { FC } from 'react';
 
 interface IUser {
     id: number;
@@ -67,7 +67,7 @@ type TransformedComponentConfig<P extends Record<string, any>> = {
 };
 type TComponentPropsUnion = TVideoComponentConfig | any;
 
-declare function getComponentByType(type: TBasicComponentConfig["type"]): react.FC<any>;
+declare function getComponentByType(type: TBasicComponentConfig["type"]): React.FC<any>;
 declare function getDefaultValueByConfig(componentPropsWrapper: TransformedComponentConfig<Record<string, any>>): Record<string, any>;
 declare function fillComponentPropsByConfig<T extends TransformedComponentConfig<Record<string, any>>>(props: Record<string, any>, componentPropsWrapper: T): T;
 
@@ -83,7 +83,76 @@ type TVideoComponentConfig = TBasicComponentConfig<"video", IVideoComponentProps
 type TVideoComponentConfigResult = TransformedComponentConfig<IVideoComponentProps>;
 declare const videoComponentDefaultConfig: TVideoComponentConfigResult;
 
-declare function VideoComponent(_props: IVideoComponentProps): react__default.JSX.Element;
+declare function VideoComponent(_props: IVideoComponentProps): React__default.JSX.Element;
+
+interface IImageComponentProps {
+    id: string;
+    url: string;
+    name: string;
+    height: string | number;
+    handleClicked: "open-url" | "none";
+    fit: "contain" | "cover" | "fill" | "none" | "scale-down" | "initial" | "revert" | "unset";
+    link?: string;
+}
+type TImageComponentConfig = TBasicComponentConfig<"image", IImageComponentProps>;
+type TImageComponentConfigResult = TransformedComponentConfig<IImageComponentProps>;
+declare const defaultImageInfo: IImageComponentProps;
+declare const imageComponentDefaultConfig: TImageComponentConfigResult;
+
+declare function ImageComponent(_props: IImageComponentProps): React__default.JSX.Element;
+
+interface ISwiperComponentProps {
+    id: string;
+    interval: number;
+    autoPlay: boolean;
+    images: IImageComponentProps[];
+    showIndicators: boolean;
+    dotPosition: "bottom" | "top" | "left" | "right";
+}
+type TSwiperComponentConfig = TBasicComponentConfig<"swiper", ISwiperComponentProps>;
+type TSwiperComponentConfigResult = TransformedComponentConfig<ISwiperComponentProps>;
+declare const swiperComponentDefaultConfig: TSwiperComponentConfigResult;
+
+declare function SwiperComponent(_props: ISwiperComponentProps): React__default.JSX.Element;
+
+interface ICardComponentProps {
+    title: string;
+    coverImg: string;
+    description: string;
+}
+type TCardComponentConfig = TBasicComponentConfig<"card", ICardComponentProps>;
+type TCardComponentConfigResult = TransformedComponentConfig<ICardComponentProps>;
+declare const cardComponentDefaultConfig: TCardComponentConfigResult;
+
+declare function CardComponent(_props: ICardComponentProps): React__default.JSX.Element;
+
+interface IListItem {
+    id: string;
+    title: string;
+    avatar: string;
+    description: string;
+    titleLink: string;
+}
+interface IListComponentProps {
+    id: string;
+    items: IListItem[];
+}
+type TListComponentConfig = TBasicComponentConfig<"list", IListComponentProps>;
+type TListComponentConfigResult = TransformedComponentConfig<IListComponentProps>;
+declare const listItem: IListItem;
+declare const listComponentDefaultConfig: TListComponentConfigResult;
+
+declare function ListComponent(_props: IListComponentProps): React__default.JSX.Element;
+
+interface ITextComponentProps {
+    title: string;
+    size: "xs" | "sm" | "base" | "lg" | "xl";
+}
+type TTextComponentConfig = TBasicComponentConfig<"titleText", ITextComponentProps>;
+type TTextComponentConfigResult = TransformedComponentConfig<ITextComponentProps>;
+declare const textComponentDefaultConfig: TTextComponentConfigResult;
+
+declare function TextComponent(_props: ITextComponentProps): React__default.JSX.Element;
 
 /**
  * 从对象中删除指定的属性
@@ -118,4 +187,4 @@ declare function calcValueByString(str: string): string | number | boolean;
  */
 declare function calcTypeByString(str: string): "number" | "boolean" | "string";
 
-export { type CaptchaRequest, type IComponent, type IComponentData, type IComponentPropWarpper, type ILowCode, type IUser, type IVideoComponentProps, type LoginWithPasswordRequest, type LoginWithPhoneRequest, type PostReleaseRequest, type RegisterRequest, type SendCodeRequest, type TBasicComponentConfig, type TComponentPropsUnion, type TComponentTypes, type TVideoComponentConfig, type TVideoComponentConfigResult, type TransformedComponentConfig, VideoComponent, calcTypeByString, calcValueByString, componentList, fillComponentPropsByConfig, getComponentByType, getDefaultValueByConfig, objectOmit, objectPick, videoComponentDefaultConfig };
+export { type CaptchaRequest, CardComponent, type ICardComponentProps, type IComponent, type IComponentData, type IComponentPropWarpper, type IImageComponentProps, type IListComponentProps, type IListItem, type ILowCode, type ISwiperComponentProps, type ITextComponentProps, type IUser, type IVideoComponentProps, ImageComponent, ListComponent, type LoginWithPasswordRequest, type LoginWithPhoneRequest, type PostReleaseRequest, type RegisterRequest, type SendCodeRequest, SwiperComponent, type TBasicComponentConfig, type TCardComponentConfig, type TCardComponentConfigResult, type TComponentPropsUnion, type TComponentTypes, type TImageComponentConfig, type TImageComponentConfigResult, type TListComponentConfig, type TListComponentConfigResult, type TSwiperComponentConfig, type TSwiperComponentConfigResult, type TTextComponentConfig, type TTextComponentConfigResult, type TVideoComponentConfig, type TVideoComponentConfigResult, TextComponent, type TransformedComponentConfig, VideoComponent, calcTypeByString, calcValueByString, cardComponentDefaultConfig, componentList, defaultImageInfo, fillComponentPropsByConfig, getComponentByType, getDefaultValueByConfig, imageComponentDefaultConfig, listComponentDefaultConfig, listItem, objectOmit, objectPick, swiperComponentDefaultConfig, textComponentDefaultConfig, videoComponentDefaultConfig };

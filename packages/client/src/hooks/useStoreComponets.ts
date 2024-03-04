@@ -1,10 +1,7 @@
 import { ulid } from "ulid";
 import { action, computed } from "mobx";
-import type {
-  TComponentPropsUnion,
-  TComponentTypes,
-  calcValueByString,
-} from "@lowcode/share";
+import type { TComponentPropsUnion, TComponentTypes } from "@lowcode/share";
+import { calcValueByString } from "@lowcode/share";
 import { createStoreComponents } from "../store";
 
 const storeComponents = createStoreComponents();
@@ -57,6 +54,23 @@ export function useStoreComponents() {
     }
   );
 
+  // 定义带有数组参数的更新当前组件配置的函数
+  type TUpdateCurrentCompConfigWithArray = (args: {
+    key: string;
+    index: number;
+    field: string;
+    value: string;
+  }) => void;
+  const updateCurrentCompConfigWithArray: TUpdateCurrentCompConfigWithArray =
+    action(({ key, index, field, value }) => {
+      // 获取当前组件配置
+      const curCompConfig = getCurrentComponentConfig.get();
+      if (!curCompConfig) return;
+
+      // 更新当前组件配置的props属性
+      curCompConfig.props[key][index][field] = value;
+    });
+
   return {
     push,
     getComponentById,
@@ -65,5 +79,6 @@ export function useStoreComponents() {
     setCurrentComponent,
     store: storeComponents,
     updateCurrentComponent,
+    updateCurrentCompConfigWithArray,
   };
 }

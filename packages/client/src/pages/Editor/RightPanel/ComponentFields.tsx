@@ -13,8 +13,10 @@ const ComponentFields: FC<{ store: TStoreComponents }> = observer(
 
     const { getCurrentComponentConfig } = useStoreComponents();
 
+    // 右侧的配置属性组件
     const ComponentProps = getComponentPropsByType(
       getCurrentComponentConfig.get()!.type
+      // "image"
     );
 
     return (
