@@ -3,5 +3,6 @@
 /.vscode
 node_modules
 /packages/server/msgConfig.ts
+/packages/server/aliConfig.ts
 
 /packages/*/dist

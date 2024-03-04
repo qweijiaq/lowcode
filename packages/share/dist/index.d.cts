@@ -32,6 +32,14 @@ interface IComponentData {
     props: Record<string, any>;
 }
 
+interface IResources {
+    id: number;
+    account_id: number;
+    url: string;
+    type: UploadType;
+    name: string;
+}
+
 interface CaptchaRequest {
     type: "register" | "login";
 }
@@ -50,6 +58,10 @@ type LoginWithPhoneRequest = Pick<IUser, "phone"> & {
 type PostReleaseRequest = Omit<ILowCode, "id" | "account_id" | "components"> & {
     components: Omit<IComponent, "account_id" | "page_id">[];
 };
+
+type UploadType = "image" | "video";
+type ResourcesRequest = Pick<IResources, "type">;
+type DeleteResourcesRequest = Pick<IResources, "id">;
 
 type TComponentTypes = "video" | "swiper" | "qrcode" | "card" | "list" | "image" | "titleText" | "split" | "richText" | "input" | "textArea" | "radio" | "checkbox" | "empty" | "alert";
 interface IComponentPropWarpper<T> {
@@ -342,4 +354,4 @@ declare function calcValueByString(str: string): string | number | boolean;
  */
 declare function calcTypeByString(str: string): "number" | "boolean" | "string";
 
-export { AlertComponent, type CaptchaRequest, CardComponent, CheckboxComponent, EmptyComponent, type IAlertComponentProps, type ICardComponentProps, type ICheckboxComponentProps, type IComponent, type IComponentData, type IComponentPropWarpper, type IEmptyComponentProps, type IImageComponentProps, type IInputComponentProps, type IListComponentProps, type IListItem, type ILowCode, type IQrcodeComponentProps, type IRadioComponentProps, type IRichTextComponentProps, type ISplitComponentProps, type ISwiperComponentProps, type ITextAreaComponentProps, type ITextComponentProps, type IUser, type IVideoComponentProps, ImageComponent, InputComponent, ListComponent, type LoginWithPasswordRequest, type LoginWithPhoneRequest, type PostReleaseRequest, QrcodeComponent, RadioComponent, type RegisterRequest, RichTextComponent, type SendCodeRequest, SplitComponent, SwiperComponent, type TAlertComponentConfig, type TAlertComponentConfigResult, type TBasicComponentConfig, type TCardComponentConfig, type TCardComponentConfigResult, type TCheckboxComponentConfig, type TCheckboxComponentConfigResult, type TComponentPropsUnion, type TComponentTypes, type TEmptyComponentConfig, type TEmptyComponentConfigResult, type TImageComponentConfig, type TImageComponentConfigResult, type TInputComponentConfig, type TInputComponentConfigResult, type TListComponentConfig, type TListComponentConfigResult, type TQrcodeComponentConfig, type TQrcodeComponentConfigResult, type TRadioComponentConfig, type TRadioComponentConfigResult, type TRichTextComponentConfig, type TRichTextComponentConfigResult, type TSplitComponentConfig, type TSplitComponentConfigResult, type TSwiperComponentConfig, type TSwiperComponentConfigResult, type TTextAreaComponentConfig, type TTextAreaComponentConfigResult, type TTextComponentConfig, type TTextComponentConfigResult, type TVideoComponentConfig, type TVideoComponentConfigResult, TextAreaComponent, TextComponent, type TransformedComponentConfig, VideoComponent, alertComponentDefaultConfig, calcTypeByString, calcValueByString, cardComponentDefaultConfig, checkboxComponentDefaultConfig, componentList, defaultCheckboxOptions, defaultImageInfo, defaultRadioOptions, emptyComponentDefaultConfig, fillComponentPropsByConfig, getComponentByType, getDefaultValueByConfig, imageComponentDefaultConfig, inputComponentDefaultConfig, listComponentDefaultConfig, listItem, objectOmit, objectPick, qrcodeComponentDefaultConfig, radioComponentDefaultConfig, richTextComponentDefaultConfig, splitComponentDefaultConfig, swiperComponentDefaultConfig, textComponentDefaultConfig, videoComponentDefaultConfig };
+export { AlertComponent, type CaptchaRequest, CardComponent, CheckboxComponent, type DeleteResourcesRequest, EmptyComponent, type IAlertComponentProps, type ICardComponentProps, type ICheckboxComponentProps, type IComponent, type IComponentData, type IComponentPropWarpper, type IEmptyComponentProps, type IImageComponentProps, type IInputComponentProps, type IListComponentProps, type IListItem, type ILowCode, type IQrcodeComponentProps, type IRadioComponentProps, type IResources, type IRichTextComponentProps, type ISplitComponentProps, type ISwiperComponentProps, type ITextAreaComponentProps, type ITextComponentProps, type IUser, type IVideoComponentProps, ImageComponent, InputComponent, ListComponent, type LoginWithPasswordRequest, type LoginWithPhoneRequest, type PostReleaseRequest, QrcodeComponent, RadioComponent, type RegisterRequest, type ResourcesRequest, RichTextComponent, type SendCodeRequest, SplitComponent, SwiperComponent, type TAlertComponentConfig, type TAlertComponentConfigResult, type TBasicComponentConfig, type TCardComponentConfig, type TCardComponentConfigResult, type TCheckboxComponentConfig, type TCheckboxComponentConfigResult, type TComponentPropsUnion, type TComponentTypes, type TEmptyComponentConfig, type TEmptyComponentConfigResult, type TImageComponentConfig, type TImageComponentConfigResult, type TInputComponentConfig, type TInputComponentConfigResult, type TListComponentConfig, type TListComponentConfigResult, type TQrcodeComponentConfig, type TQrcodeComponentConfigResult, type TRadioComponentConfig, type TRadioComponentConfigResult, type TRichTextComponentConfig, type TRichTextComponentConfigResult, type TSplitComponentConfig, type TSplitComponentConfigResult, type TSwiperComponentConfig, type TSwiperComponentConfigResult, type TTextAreaComponentConfig, type TTextAreaComponentConfigResult, type TTextComponentConfig, type TTextComponentConfigResult, type TVideoComponentConfig, type TVideoComponentConfigResult, TextAreaComponent, TextComponent, type TransformedComponentConfig, type UploadType, VideoComponent, alertComponentDefaultConfig, calcTypeByString, calcValueByString, cardComponentDefaultConfig, checkboxComponentDefaultConfig, componentList, defaultCheckboxOptions, defaultImageInfo, defaultRadioOptions, emptyComponentDefaultConfig, fillComponentPropsByConfig, getComponentByType, getDefaultValueByConfig, imageComponentDefaultConfig, inputComponentDefaultConfig, listComponentDefaultConfig, listItem, objectOmit, objectPick, qrcodeComponentDefaultConfig, radioComponentDefaultConfig, richTextComponentDefaultConfig, splitComponentDefaultConfig, swiperComponentDefaultConfig, textComponentDefaultConfig, videoComponentDefaultConfig };
