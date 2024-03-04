@@ -1,4 +1,4 @@
-import { Controller, Post } from '@nestjs/common';
+import { BadRequestException, Controller, Post } from '@nestjs/common';
 import { UserService } from './user.service';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -7,10 +7,9 @@ import { Body } from '@nestjs/common/decorators';
 import { GetUserAgent, GetUserIp } from 'src/utils/GetUserMsg';
 import { CaptchaDto } from './dto/captcha.dto';
 import { SecretTool } from '../utils/Secret';
-import { SendPhoneMsgTool } from '../utils/SendPhoneMsg';
 import { SendCodeDto } from './dto/sendCode.dto';
 import { RandomTool } from '../utils/Random';
-import { CaptchaTool } from '../utils/Captcha';
+import { RegisterDto } from './dto/register';
 
 @Controller('user')
 export class UserController {
@@ -18,7 +17,6 @@ export class UserController {
     private readonly userService: UserService,
     private readonly secretTool: SecretTool,
     private readonly randomTool: RandomTool,
-    private readonly captchaTool: CaptchaTool,
     @InjectRepository(User) private readonly userRepository: Repository<User>,
   ) {}
 
@@ -56,5 +54,14 @@ export class UserController {
       _key,
       this.randomTool.randomCode(),
     );
+  }
+
+  /**
+   * 注册控制器
+   */
+  @Post('register')
+  register(@Body() body: RegisterDto) {
+    const { phone, sendCode, password, confirm } = body;
+    return this.userService.register(phone, sendCode, password, confirm);
   }
 }

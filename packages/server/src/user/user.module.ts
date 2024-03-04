@@ -6,10 +6,17 @@ import { User } from './entities/user.entity';
 import { CaptchaTool } from '../utils/Captcha';
 import { SecretTool } from 'src/utils/Secret';
 import { SendPhoneMsgTool } from '../utils/SendPhoneMsg';
+import { RandomTool } from 'src/utils/Random';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
   controllers: [UserController],
-  providers: [UserService, CaptchaTool, SecretTool, SendPhoneMsgTool],
+  providers: [
+    UserService,
+    CaptchaTool,
+    SecretTool,
+    SendPhoneMsgTool,
+    RandomTool,
+  ],
 })
 export class UserModule {}

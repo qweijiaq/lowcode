@@ -3,6 +3,12 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { CaptchaTool } from '../utils/Captcha';
 import { RedisModule } from 'src/utils/modules/redis.module';
 import { SendPhoneMsgTool } from 'src/utils/SendPhoneMsg';
+import { RandomTool } from '../utils/Random';
+import { SecretTool } from 'src/utils/Secret';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { User } from './entities/user.entity';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UserService {
@@ -10,6 +16,10 @@ export class UserService {
     private readonly captchaTool: CaptchaTool,
     private readonly redis: RedisModule,
     private readonly sendPhoneMsgTool: SendPhoneMsgTool,
+    private readonly randomTool: RandomTool,
+    private readonly secretTool: SecretTool,
+    private readonly jwtService: JwtService,
+    @InjectRepository(User) private readonly userRepository: Repository<User>,
   ) {}
 
   /**
@@ -71,5 +81,63 @@ export class UserService {
       this.redis.del(`${type}:code:${phone}`);
       throw new BadRequestException('发送失败, 请重试');
     }
+  }
+
+  /**
+   * 注册服务
+   * @param phone 账号
+   * @param sendCode 验证码
+   * @param password 密码
+   * @param confirm 确认密码
+   */
+  async register(
+    phone: string,
+    sendCode: string,
+    password: string,
+    confirm: string,
+  ) {
+    // 手机号注册查重
+    const existUser = await this.userRepository.findOne({ where: { phone } });
+    if (existUser) throw new BadRequestException('该手机号已被注册');
+
+    // 获取redis中的验证码和用户传入的进行对比
+    if (await this.redis.exists(`register:code:${phone}`)) {
+      const codeRes = (await this.redis.get(`register:code:${phone}`))!.split(
+        '_',
+      )[1];
+
+      if (sendCode !== codeRes)
+        throw new BadRequestException('短信验证码不正确');
+    } else {
+      throw new BadRequestException('请先获取短信验证码');
+    }
+
+    // 验证二次密码
+    if (password !== confirm)
+      throw new BadRequestException('输入的两次密码不一致');
+
+    // 随机生成头像和昵称
+    const name = this.randomTool.randomName();
+    const avatar = this.randomTool.randomAvatar();
+
+    // 生成加密密码
+    const pwd = this.secretTool.getSecret(`${password}`);
+
+    // 将新用户数据插入数据库
+    const user = await this.userRepository.save({
+      username: name,
+      avatar: avatar,
+      phone,
+      password: pwd,
+      openId: '',
+    });
+
+    // 生成token 7天过期
+    const token = this.jwtService.sign({ id: user.id });
+
+    return {
+      data: token,
+      msg: '注册成功！',
+    };
   }
 }
