@@ -327,8 +327,83 @@ function TextComponent(_props) {
         setSize("text-base");
         break;
     }
-  }, [_props]);
+  }, [_props.size]);
   return /* @__PURE__ */ React__default.createElement("span", { className: size }, props.title);
+}
+
+const splitComponentDefaultConfig = {
+  dashed: {
+    value: false,
+    defaultValue: false,
+    isHidden: false
+  },
+  orientation: {
+    value: "center",
+    defaultValue: "center",
+    isHidden: false
+  },
+  text: {
+    value: "",
+    defaultValue: "",
+    isHidden: false
+  }
+};
+
+function SplitComponent(_props) {
+  const props = React.useMemo(() => {
+    return {
+      ...getDefaultValueByConfig(splitComponentDefaultConfig),
+      ..._props
+    };
+  }, [_props]);
+  if (!props.text) {
+    return /* @__PURE__ */ React__default.createElement(antd.Divider, { ...objectOmit(props, ["text"]) });
+  } else {
+    return /* @__PURE__ */ React__default.createElement(antd.Divider, { ...objectOmit(props, ["text"]) }, /* @__PURE__ */ React__default.createElement("span", { className: "text-gray-500/80" }, props?.text));
+  }
+}
+
+const emptyComponentDefaultConfig = {
+  description: {
+    value: "\u6682\u65E0\u6570\u636E",
+    defaultValue: "\u6682\u65E0\u6570\u636E",
+    isHidden: false
+  },
+  image: {
+    value: "",
+    defaultValue: "",
+    isHidden: false
+  },
+  imageWidth: {
+    value: 100,
+    defaultValue: 100,
+    isHidden: false
+  },
+  imageHeight: {
+    value: 100,
+    defaultValue: 100,
+    isHidden: false
+  },
+  imageObjectFit: {
+    value: "contain",
+    defaultValue: "contain",
+    isHidden: false
+  }
+};
+
+function EmptyComponent(_props) {
+  const props = React.useMemo(() => {
+    return { ...getDefaultValueByConfig(emptyComponentDefaultConfig), ..._props };
+  }, [_props]);
+  return /* @__PURE__ */ React__default.createElement(
+    antd.Empty,
+    {
+      className: "flex flex-col items-center justify-center",
+      description: props.description || "\u6682\u65E0\u72B6\u6001",
+      image: props.image || antd.Empty.PRESENTED_IMAGE_DEFAULT,
+      imageStyle: { height: `${props.imageHeight}px`, width: `${props.imageWidth}px`, objectFit: props.imageObjectFit }
+    }
+  );
 }
 
 function objectOmit(obj, keys) {
@@ -352,7 +427,9 @@ const componentList = {
   swiper: SwiperComponent,
   card: CardComponent,
   list: ListComponent,
-  titleText: TextComponent
+  titleText: TextComponent,
+  split: SplitComponent,
+  empty: EmptyComponent
 };
 
 function calcValueByString(str) {
@@ -372,8 +449,10 @@ function calcTypeByString(str) {
 }
 
 exports.CardComponent = CardComponent;
+exports.EmptyComponent = EmptyComponent;
 exports.ImageComponent = ImageComponent;
 exports.ListComponent = ListComponent;
+exports.SplitComponent = SplitComponent;
 exports.SwiperComponent = SwiperComponent;
 exports.TextComponent = TextComponent;
 exports.VideoComponent = VideoComponent;
@@ -382,6 +461,7 @@ exports.calcValueByString = calcValueByString;
 exports.cardComponentDefaultConfig = cardComponentDefaultConfig;
 exports.componentList = componentList;
 exports.defaultImageInfo = defaultImageInfo;
+exports.emptyComponentDefaultConfig = emptyComponentDefaultConfig;
 exports.fillComponentPropsByConfig = fillComponentPropsByConfig;
 exports.getComponentByType = getComponentByType;
 exports.getDefaultValueByConfig = getDefaultValueByConfig;
@@ -390,6 +470,7 @@ exports.listComponentDefaultConfig = listComponentDefaultConfig;
 exports.listItem = listItem;
 exports.objectOmit = objectOmit;
 exports.objectPick = objectPick;
+exports.splitComponentDefaultConfig = splitComponentDefaultConfig;
 exports.swiperComponentDefaultConfig = swiperComponentDefaultConfig;
 exports.textComponentDefaultConfig = textComponentDefaultConfig;
 exports.videoComponentDefaultConfig = videoComponentDefaultConfig;

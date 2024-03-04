@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useEffect } from 'react';
-import { Carousel, Card, List, Avatar } from 'antd';
+import { Carousel, Card, List, Avatar, Divider, Empty } from 'antd';
 
 function getComponentByType(type) {
   return componentList[type];
@@ -321,8 +321,83 @@ function TextComponent(_props) {
         setSize("text-base");
         break;
     }
-  }, [_props]);
+  }, [_props.size]);
   return /* @__PURE__ */ React.createElement("span", { className: size }, props.title);
+}
+
+const splitComponentDefaultConfig = {
+  dashed: {
+    value: false,
+    defaultValue: false,
+    isHidden: false
+  },
+  orientation: {
+    value: "center",
+    defaultValue: "center",
+    isHidden: false
+  },
+  text: {
+    value: "",
+    defaultValue: "",
+    isHidden: false
+  }
+};
+
+function SplitComponent(_props) {
+  const props = useMemo(() => {
+    return {
+      ...getDefaultValueByConfig(splitComponentDefaultConfig),
+      ..._props
+    };
+  }, [_props]);
+  if (!props.text) {
+    return /* @__PURE__ */ React.createElement(Divider, { ...objectOmit(props, ["text"]) });
+  } else {
+    return /* @__PURE__ */ React.createElement(Divider, { ...objectOmit(props, ["text"]) }, /* @__PURE__ */ React.createElement("span", { className: "text-gray-500/80" }, props?.text));
+  }
+}
+
+const emptyComponentDefaultConfig = {
+  description: {
+    value: "\u6682\u65E0\u6570\u636E",
+    defaultValue: "\u6682\u65E0\u6570\u636E",
+    isHidden: false
+  },
+  image: {
+    value: "",
+    defaultValue: "",
+    isHidden: false
+  },
+  imageWidth: {
+    value: 100,
+    defaultValue: 100,
+    isHidden: false
+  },
+  imageHeight: {
+    value: 100,
+    defaultValue: 100,
+    isHidden: false
+  },
+  imageObjectFit: {
+    value: "contain",
+    defaultValue: "contain",
+    isHidden: false
+  }
+};
+
+function EmptyComponent(_props) {
+  const props = useMemo(() => {
+    return { ...getDefaultValueByConfig(emptyComponentDefaultConfig), ..._props };
+  }, [_props]);
+  return /* @__PURE__ */ React.createElement(
+    Empty,
+    {
+      className: "flex flex-col items-center justify-center",
+      description: props.description || "\u6682\u65E0\u72B6\u6001",
+      image: props.image || Empty.PRESENTED_IMAGE_DEFAULT,
+      imageStyle: { height: `${props.imageHeight}px`, width: `${props.imageWidth}px`, objectFit: props.imageObjectFit }
+    }
+  );
 }
 
 function objectOmit(obj, keys) {
@@ -346,7 +421,9 @@ const componentList = {
   swiper: SwiperComponent,
   card: CardComponent,
   list: ListComponent,
-  titleText: TextComponent
+  titleText: TextComponent,
+  split: SplitComponent,
+  empty: EmptyComponent
 };
 
 function calcValueByString(str) {
@@ -365,4 +442,4 @@ function calcTypeByString(str) {
   return "string";
 }
 
-export { CardComponent, ImageComponent, ListComponent, SwiperComponent, TextComponent, VideoComponent, calcTypeByString, calcValueByString, cardComponentDefaultConfig, componentList, defaultImageInfo, fillComponentPropsByConfig, getComponentByType, getDefaultValueByConfig, imageComponentDefaultConfig, listComponentDefaultConfig, listItem, objectOmit, objectPick, swiperComponentDefaultConfig, textComponentDefaultConfig, videoComponentDefaultConfig };
+export { CardComponent, EmptyComponent, ImageComponent, ListComponent, SplitComponent, SwiperComponent, TextComponent, VideoComponent, calcTypeByString, calcValueByString, cardComponentDefaultConfig, componentList, defaultImageInfo, emptyComponentDefaultConfig, fillComponentPropsByConfig, getComponentByType, getDefaultValueByConfig, imageComponentDefaultConfig, listComponentDefaultConfig, listItem, objectOmit, objectPick, splitComponentDefaultConfig, swiperComponentDefaultConfig, textComponentDefaultConfig, videoComponentDefaultConfig };

@@ -154,6 +154,30 @@ declare const textComponentDefaultConfig: TTextComponentConfigResult;
 
 declare function TextComponent(_props: ITextComponentProps): React__default.JSX.Element;
 
+interface ISplitComponentProps {
+    text: string;
+    dashed: boolean;
+    orientation: 'left' | 'center' | 'right';
+}
+type TSplitComponentConfig = TBasicComponentConfig<'split', ISplitComponentProps>;
+type TSplitComponentConfigResult = TransformedComponentConfig<ISplitComponentProps>;
+declare const splitComponentDefaultConfig: TSplitComponentConfigResult;
+
+declare function SplitComponent(_props: ISplitComponentProps): React__default.JSX.Element;
+
+interface IEmptyComponentProps {
+    image: string;
+    description: string;
+    imageWidth?: number;
+    imageHeight?: number;
+    imageObjectFit: IImageComponentProps['fit'];
+}
+type TEmptyComponentConfig = TBasicComponentConfig<'empty', IEmptyComponentProps>;
+type TEmptyComponentConfigResult = TransformedComponentConfig<IEmptyComponentProps>;
+declare const emptyComponentDefaultConfig: TEmptyComponentConfigResult;
+
+declare function EmptyComponent(_props: IEmptyComponentProps): React__default.JSX.Element;
+
 /**
  * 从对象中删除指定的属性
  *
@@ -187,4 +211,4 @@ declare function calcValueByString(str: string): string | number | boolean;
  */
 declare function calcTypeByString(str: string): "number" | "boolean" | "string";
 
-export { type CaptchaRequest, CardComponent, type ICardComponentProps, type IComponent, type IComponentData, type IComponentPropWarpper, type IImageComponentProps, type IListComponentProps, type IListItem, type ILowCode, type ISwiperComponentProps, type ITextComponentProps, type IUser, type IVideoComponentProps, ImageComponent, ListComponent, type LoginWithPasswordRequest, type LoginWithPhoneRequest, type PostReleaseRequest, type RegisterRequest, type SendCodeRequest, SwiperComponent, type TBasicComponentConfig, type TCardComponentConfig, type TCardComponentConfigResult, type TComponentPropsUnion, type TComponentTypes, type TImageComponentConfig, type TImageComponentConfigResult, type TListComponentConfig, type TListComponentConfigResult, type TSwiperComponentConfig, type TSwiperComponentConfigResult, type TTextComponentConfig, type TTextComponentConfigResult, type TVideoComponentConfig, type TVideoComponentConfigResult, TextComponent, type TransformedComponentConfig, VideoComponent, calcTypeByString, calcValueByString, cardComponentDefaultConfig, componentList, defaultImageInfo, fillComponentPropsByConfig, getComponentByType, getDefaultValueByConfig, imageComponentDefaultConfig, listComponentDefaultConfig, listItem, objectOmit, objectPick, swiperComponentDefaultConfig, textComponentDefaultConfig, videoComponentDefaultConfig };
+export { type CaptchaRequest, CardComponent, EmptyComponent, type ICardComponentProps, type IComponent, type IComponentData, type IComponentPropWarpper, type IEmptyComponentProps, type IImageComponentProps, type IListComponentProps, type IListItem, type ILowCode, type ISplitComponentProps, type ISwiperComponentProps, type ITextComponentProps, type IUser, type IVideoComponentProps, ImageComponent, ListComponent, type LoginWithPasswordRequest, type LoginWithPhoneRequest, type PostReleaseRequest, type RegisterRequest, type SendCodeRequest, SplitComponent, SwiperComponent, type TBasicComponentConfig, type TCardComponentConfig, type TCardComponentConfigResult, type TComponentPropsUnion, type TComponentTypes, type TEmptyComponentConfig, type TEmptyComponentConfigResult, type TImageComponentConfig, type TImageComponentConfigResult, type TListComponentConfig, type TListComponentConfigResult, type TSplitComponentConfig, type TSplitComponentConfigResult, type TSwiperComponentConfig, type TSwiperComponentConfigResult, type TTextComponentConfig, type TTextComponentConfigResult, type TVideoComponentConfig, type TVideoComponentConfigResult, TextComponent, type TransformedComponentConfig, VideoComponent, calcTypeByString, calcValueByString, cardComponentDefaultConfig, componentList, defaultImageInfo, emptyComponentDefaultConfig, fillComponentPropsByConfig, getComponentByType, getDefaultValueByConfig, imageComponentDefaultConfig, listComponentDefaultConfig, listItem, objectOmit, objectPick, splitComponentDefaultConfig, swiperComponentDefaultConfig, textComponentDefaultConfig, videoComponentDefaultConfig };

@@ -34,7 +34,7 @@ export default function TextComponent(_props: ITextComponentProps) {
         setSize("text-base");
         break;
     }
-  }, [_props]);
+  }, [_props.size]);
 
   return <span className={size}>{props.title}</span>;
 }

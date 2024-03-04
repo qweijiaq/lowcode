@@ -7,6 +7,8 @@ import {
   SwiperComponent,
   VideoComponent,
   TextComponent,
+  SplitComponent,
+  EmptyComponent,
 } from "..";
 
 // @ts-ignore
@@ -17,4 +19,6 @@ export const componentList: Record<TComponentTypes, FC<any>> = {
   card: CardComponent,
   list: ListComponent,
   titleText: TextComponent,
+  split: SplitComponent,
+  empty: EmptyComponent,
 };

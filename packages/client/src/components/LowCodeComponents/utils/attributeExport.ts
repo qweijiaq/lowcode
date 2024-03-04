@@ -6,6 +6,8 @@ import {
   CardComponentProps,
   ListComponentProps,
   TextComponentProps,
+  SplitComponentProps,
+  EmptyComponentProps,
 } from "..";
 import type { TBasicComponentConfig, TComponentTypes } from "@lowcode/share";
 
@@ -17,6 +19,8 @@ export const componentPropsList: Record<TComponentTypes, FC<any>> = {
   card: CardComponentProps,
   list: ListComponentProps,
   titleText: TextComponentProps,
+  split: SplitComponentProps,
+  empty: EmptyComponentProps,
 };
 
 export function getComponentPropsByType(type: TBasicComponentConfig["type"]) {

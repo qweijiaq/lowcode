@@ -6,3 +6,5 @@ export * from "./LowCodeSwiper";
 export * from "./LowCodeCard";
 export * from "./LowCodeList";
 export * from "./LowCodeText";
+export * from "./LowCodeSplit";
+export * from "./LowCodeEmpty";
