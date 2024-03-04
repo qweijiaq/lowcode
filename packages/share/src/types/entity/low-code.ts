@@ -1,4 +1,4 @@
-import { TComponentTypes } from "../../components";
+import { TComponentTypes } from "../..";
 
 // 页面表属性类型
 export interface ILowCode {

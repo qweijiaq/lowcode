@@ -15,8 +15,11 @@
     "ahooks": "^3.7.10",
     "antd": "^5.11.2",
     "axios": "^1.6.7",
+    "classnames": "^2.5.1",
     "mobx": "^6.12.0",
-    "react-router-dom": "^6.22.2"
+    "mobx-react-lite": "^4.0.5",
+    "react-router-dom": "^6.22.2",
+    "ulid": "^2.3.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",

@@ -17,8 +17,11 @@ import {
 import { Divider } from "antd";
 import QrcodeSVG from "../../../assets/wechat.jpg";
 import type { FC, ReactNode } from "react";
+import { useStoreComponents } from "../../../hooks";
+import { TComponentTypes } from "@lowcode/share";
 
 // 不同组件配置数组
+// eslint-disable-next-line react-refresh/only-export-components
 export const components = [
   {
     type: "video",
@@ -108,9 +111,17 @@ interface ComponentProps {
 }
 
 // 公共样式组件
-const EditorComponent: FC<ComponentProps> = ({ icon, name }) => {
+const EditorComponent: FC<ComponentProps> = ({ icon, name, type }) => {
+  const store = useStoreComponents();
+  // 将要展示的组件类型告诉 store
+  function handleClick() {
+    store.push(type as TComponentTypes);
+  }
   return (
-    <div className="border py-2 pl-2 w-full flex items-center gap-1 text-xs cursor-pointer select-none hover:border-blue-500">
+    <div
+      onClick={handleClick}
+      className="border py-2 pl-2 w-full flex items-center gap-1 text-xs cursor-pointer select-none hover:border-blue-500"
+    >
       {icon}
       <span>{name}</span>
     </div>

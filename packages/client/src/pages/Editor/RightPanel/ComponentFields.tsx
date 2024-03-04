@@ -1,0 +1,29 @@
+import type { FC } from "react";
+import { observer } from "mobx-react-lite";
+import { toJS } from "mobx";
+import { TStoreComponents } from "../../../store";
+import { useStoreComponents } from "../../../hooks";
+import { getComponentPropsByType } from "../../../components/LowCodeComponents";
+
+const ComponentFields: FC<{ store: TStoreComponents }> = observer(
+  ({ store }) => {
+    // 为选中组件展示
+    if (!store.currentCompConfig)
+      return <div style={{ textAlign: "center" }}>未选中组件</div>;
+
+    const { getCurrentComponentConfig } = useStoreComponents();
+
+    const ComponentProps = getComponentPropsByType(
+      getCurrentComponentConfig.get()!.type
+    );
+
+    return (
+      <ComponentProps
+        {...toJS(getCurrentComponentConfig.get()?.props)}
+        id={getCurrentComponentConfig.get()?.id}
+      />
+    );
+  }
+);
+
+export default ComponentFields;
