@@ -5,6 +5,10 @@
  */
 import type { ExecutionContext } from '@nestjs/common'; // 执行上下文的类型
 import { createParamDecorator } from '@nestjs/common'; // 用于创建自定义参数装饰器
+import { IUser } from '@lowcode/share';
+
+// 用户数据类型剔除 password
+export type TCurrentUser = Omit<IUser, 'password'>;
 
 const GetUserIp = createParamDecorator((data, ctx: ExecutionContext) => {
   // 获取当前 HTTP 请求对象
@@ -20,4 +24,10 @@ const GetUserAgent = createParamDecorator((data, ctx: ExecutionContext) => {
   return request.headers['user-agent'];
 });
 
-export { GetUserIp, GetUserAgent };
+// 获取用户的所有信息参数装饰器
+const GetUserMess = createParamDecorator((data, ctx: ExecutionContext) => {
+  const request = ctx.switchToHttp().getRequest();
+  return request.user as TCurrentUser;
+});
+
+export { GetUserIp, GetUserAgent, GetUserMess };

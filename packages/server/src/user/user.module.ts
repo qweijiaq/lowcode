@@ -7,6 +7,7 @@ import { CaptchaTool } from '../utils/Captcha';
 import { SecretTool } from 'src/utils/Secret';
 import { SendPhoneMsgTool } from '../utils/SendPhoneMsg';
 import { RandomTool } from 'src/utils/Random';
+import { JWTStrategy } from 'src/utils/JwtStrategy';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
